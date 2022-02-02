@@ -18,3 +18,18 @@
 		</section>
 	</div><!-- //container -->
 </footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$('.thumb a').click(function(e){
+			e.preventDefault();
+			$('.mainImage img').attr('src',$(this).attr("href"));
+		})
+	})
+	
+</script>
+<!-- //the above jquery code means that when the document is ready and .thumb a tag is clicked then we call function e that is the image is loaded then we prevent default that means preventing the default opening in the browser and then we want it to be displayed as the mainimage -->
+
+</body>
+</html>

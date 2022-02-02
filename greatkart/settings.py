@@ -10,7 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+from ctypes import cast
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +22,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-_f--=!$08bx=ad3+m1av4)qq+_%l4*b7&1-lko3(!2laysv0j('
-
+SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG',default=True,cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['jdkart-env.eba-cvn2mqiu.us-west-2.elasticbeanstalk.com']
 
 
 # Application definition
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     'store',
     'carts',
     'orders',
+    'admin_honeypot',
 ]
 
 MIDDLEWARE = [
@@ -52,7 +54,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_session_timeout.middleware.SessionTimeoutMiddleware',
 ]
+
+SESSION_EXPIRE_SECONDS = 3600   #1 hour
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
+SESSION_TIMEOUT_REDIRECT = 'accounts/login'
 
 ROOT_URLCONF = 'greatkart.urls'
 
@@ -149,8 +156,8 @@ MESSAGE_TAGS = {
 }
 
 #SMTP configuration
-EMAIL_HOST= 'smtp.gmail.com'
-EMAIL_PORT= 587
-EMAIL_HOST_USER = 'jayatidixit2002@gmail.com'
-EMAIL_HOST_PASSWORD = 'GrayFullbuster@1'
-EMAIL_USE_TLS = True
+EMAIL_HOST= config('EMAIL_HOST')
+EMAIL_PORT= config('EMAIL_PORT',cast=int)
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = config('EMAIL_USE_TLS',cast=bool)
