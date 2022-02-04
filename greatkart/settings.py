@@ -10,20 +10,20 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import locale
-import environ
+
 import os
 
 from ctypes import cast
 from pathlib import Path
-from decouple import config
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-env = environ.Env()
+
 
 # you have to create .env file in same folder where you are using environ.Env()
 # reading .env file which located in api folder
-environ.Env.read_env()
+
 
 
 # Quick-start development settings - unsuitable for production
