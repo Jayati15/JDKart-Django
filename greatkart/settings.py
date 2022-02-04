@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import locale
 import environ
+import os
+
 from ctypes import cast
 from pathlib import Path
 from decouple import config
@@ -28,9 +30,10 @@ environ.Env.read_env()
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-_f--=!$08bx=ad3+m1av4)qq+_%l4*b7&1-lko3(!2laysv0j('
+SECRET_KEY = os.getenv("SECRET_KEY")
+
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG',default=False,cast=bool)
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -162,8 +165,8 @@ MESSAGE_TAGS = {
 }
 
 #SMTP configuration
-EMAIL_HOST= config('EMAIL_HOST')
-EMAIL_PORT= config('EMAIL_PORT',cast=int)
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-EMAIL_USE_TLS = config('EMAIL_USE_TLS',cast=bool)
+EMAIL_HOST= os.getenv('EMAIL_HOST')
+EMAIL_PORT= os.getenv('EMAIL_PORT',cast=int)
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS',cast=bool)
