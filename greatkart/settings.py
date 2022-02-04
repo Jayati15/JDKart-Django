@@ -15,9 +15,13 @@ import os
 
 from ctypes import cast
 from pathlib import Path
-from dotenv import load_dotenv
+from dotenv import Dotenv
+
+
 greatkart = os.path.expanduser('~/greatkart')  # adjust as appropriate
-load_dotenv(os.path.join(greatkart, '.env'))
+dotenv= Dotenv(os.path.join(greatkart, '.env'))
+os.environ.update(dotenv)
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
