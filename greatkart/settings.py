@@ -17,10 +17,6 @@ from decouple import config
 
 
 
-# greatkart = os.path.expanduser('~/greatkart')
-# dotenv= Dotenv(os.path.join(greatkart, '.env'))
-# os.environ.update(dotenv)
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -103,12 +99,16 @@ AUTH_USER_MODEL='accounts.Account'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+DATABASES = {     
+'default': {
+ 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+ 'NAME': 'jdkart',
+ 'USER': 'db_user',
+ 'PASSWORD': '1234',
+ 'HOST': 'localhost',
+ 'PORT': '5432'  
+} 
+} 
 
 
 # Password validation
