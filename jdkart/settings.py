@@ -14,7 +14,7 @@ import os
 from ctypes import cast
 from pathlib import Path
 from decouple import config
-import dj_database_url
+
 
 
 
