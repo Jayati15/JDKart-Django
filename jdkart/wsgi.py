@@ -1,5 +1,5 @@
 """
-WSGI config for greatkart project.
+WSGI config for jdkart project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -13,6 +13,6 @@ from django.core.wsgi import get_wsgi_application
 
 
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'greatkart.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'jdkart.settings')
 
 application = get_wsgi_application()

@@ -1,4 +1,4 @@
-"""greatkart URL Configuration
+"""jdkart URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
@@ -18,7 +18,7 @@ from django.urls import path,include
 from django.conf.urls.static import static
 from django.conf import settings
 
-from greatkart.settings import MEDIA_ROOT,MEDIA_URL
+from jdkart.settings import MEDIA_ROOT,MEDIA_URL
 from .import views
 
 urlpatterns = [
