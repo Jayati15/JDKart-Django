@@ -9,11 +9,12 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-import locale
+
 import os
 from ctypes import cast
 from pathlib import Path
 from decouple import config
+import dj_database_url
 
 
 
@@ -34,10 +35,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=True, cast=bool) # True
+DEBUG = False
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*',]
 
 
 # Application definition
@@ -55,11 +56,13 @@ INSTALLED_APPS = [
     'carts',
     'orders',
     'admin_honeypot',
+    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -103,13 +106,15 @@ DATABASES = {
 'default': {
  'ENGINE': 'django.db.backends.postgresql_psycopg2',
  'NAME': 'jdkart',
- 'USER': 'db_user',
- 'PASSWORD': '1234',
- 'HOST': 'localhost',
- 'PORT': '5432'  
+ 'USER': config("DB_USER"),
+ 'PASSWORD': config('DB_PASSWORD'),
+ 'HOST': config("DB_HOST"), 
+ 'PORT': config("DB_PORT"),
 } 
 } 
 
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -159,11 +164,13 @@ STATICFILES_DIRS = [
     'greatkart/static',
 ]
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 #media files configuration
 
 
-MEDIA_URL='/media/'
-MEDIA_ROOT= BASE_DIR /'media'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_URL = '/media/'
 
 from django.contrib.messages import constants as messages
 
