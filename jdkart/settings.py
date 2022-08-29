@@ -172,7 +172,7 @@ STATICFILES_DIRS = [
     'jdkart/static',
 ]
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 #media files configuration
 
