@@ -1,0 +1,1 @@
+web: gunicorn jdkart.wsgi --log-file -
