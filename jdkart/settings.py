@@ -103,23 +103,23 @@ AUTH_USER_MODEL='accounts.Account'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
+}
 
-DATABASES = {     
-'default': {
- 'ENGINE': 'django.db.backends.postgresql_psycopg2',
- 'NAME': 'jdkart',
- 'USER': config("DB_USER"),
- 'PASSWORD': config('DB_PASSWORD'),
- 'HOST': config("DB_HOST"), 
- 'PORT': config("DB_PORT"),
-} 
-} 
+# DATABASES = {     
+# 'default': {
+#  'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#  'NAME': 'jdkart',
+#  'USER': config("DB_USER"),
+#  'PASSWORD': config('DB_PASSWORD'),
+#  'HOST': config("DB_HOST"), 
+#  'PORT': config("DB_PORT"),
+# } 
+# } 
 
 db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
